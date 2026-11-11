@@ -35,20 +35,26 @@ gh run watch RUN_ID --exit-status
 gh run view RUN_ID --log-failed
 ```
 
-Проверьте все восемь файлов. Пример PowerShell после замены владельца:
+Проверьте общие файлы и только зарегистрированные сервисные списки. Пример PowerShell после замены владельца:
 
 ```powershell
 $rulesOwner = 'OWNER'
 $rulesBase = "https://raw.githubusercontent.com/$rulesOwner/podkop-rules/main"
-foreach ($rulesKind in @('domains', 'subnets')) {
-    foreach ($rulesService in @('all', 'telegram', 'twitch', 'albion')) {
-        $rulesUrl = "$rulesBase/$rulesKind/$rulesService.txt"
-        $rulesResponse = Invoke-WebRequest -Uri $rulesUrl -UseBasicParsing
-        [PSCustomObject]@{ Url = $rulesUrl; Status = $rulesResponse.StatusCode; Bytes = $rulesResponse.RawContentLength }
+$rulesRegistry = Get-Content -LiteralPath services.json -Raw | ConvertFrom-Json
+$rulesPaths = @('domains/all.txt', 'subnets/all.txt')
+foreach ($rulesService in $rulesRegistry.services.PSObject.Properties) {
+    $rulesPaths += $rulesService.Value.domains
+    if ($rulesService.Value.PSObject.Properties.Name -contains 'subnets') {
+        $rulesPaths += $rulesService.Value.subnets
     }
+}
+foreach ($rulesPath in $rulesPaths) {
+    $rulesUrl = "$rulesBase/$rulesPath"
+    $rulesResponse = Invoke-WebRequest -Uri $rulesUrl -UseBasicParsing
+    [PSCustomObject]@{ Url = $rulesUrl; Status = $rulesResponse.StatusCode; Bytes = $rulesResponse.RawContentLength }
 }
 ```
 
-Ожидается HTTP 200 для каждого файла; ноль байт у подсетей Twitch/Albion — ожидаемо. Дополнительно сравните тело непустых ответов с локальными файлами. GitHub Raw может кэшировать предыдущую версию; при расхождении проверьте commit и повторите позже. Пустые списки не подключайте к Podkop.
+Ожидается HTTP 200 для каждого зарегистрированного файла. У Twitch/Albion IP-списки не зарегистрированы, таких файлов и ссылок быть не должно. Дополнительно сравните тело ответов с локальными файлами. GitHub Raw может кэшировать предыдущую версию; при расхождении проверьте commit и повторите позже. Пустой общий файл возможен, если нет включённых IP-списков; подключать его к Podkop не нужно.
 
 После успешной публикации замените шаблоны README фактическими URL, обновите `docs/verification.md` ссылками запусков, статусами и датой проверки. Перепроверьте разрешение Actions на запись и ограничения основной ветки. Никогда не обходите её защиту автоматически.

@@ -19,7 +19,6 @@
       "name": "Twitch",
       "enabled": true,
       "domains": "domains/twitch.txt",
-      "subnets": "subnets/twitch.txt",
       "auto_update": false,
       "sources": [
         "twitch-home",
@@ -33,7 +32,6 @@
       "name": "Albion Online",
       "enabled": true,
       "domains": "domains/albion.txt",
-      "subnets": "subnets/albion.txt",
       "auto_update": false,
       "sources": [
         "albion-faq",

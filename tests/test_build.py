@@ -68,6 +68,8 @@ class RepositoryTests(unittest.TestCase):
     def test_invalid_registry(self):
         mutations = [lambda d: d['services']['albion'].update(enabled='true'),
                      lambda d: d['services']['albion'].update(domains='../secret'),
+                     lambda d: d['services']['albion'].update(subnets=None),
+                     lambda d: d['services']['albion'].update(subnets='../secret'),
                      lambda d: d['services']['albion'].update(sources=['unknown']),
                      lambda d: d['services']['albion'].update(auto_update=True)]
         original = (self.root / 'services.json').read_bytes()
@@ -84,7 +86,7 @@ class RepositoryTests(unittest.TestCase):
             validate(self.root)
 
     def test_missing_file(self):
-        (self.root / 'subnets/albion.txt').unlink()
+        (self.root / 'subnets/telegram.txt').unlink()
         with self.assertRaises(ValueError):
             validate(self.root)
 
@@ -137,7 +139,8 @@ class RepositoryTests(unittest.TestCase):
             self.assertEqual(mocked.call_count, 3)
 
     def test_one_service_fails_other_can_update(self):
-        self.edit_json('services.json', lambda d: d['services']['twitch'].update(auto_update=True, sources=d['services']['twitch']['sources'] + ['test-feed']))
+        self.edit_json('services.json', lambda d: d['services']['twitch'].update(auto_update=True, subnets='subnets/twitch.txt', sources=d['services']['twitch']['sources'] + ['test-feed']))
+        (self.root / 'subnets/twitch.txt').write_bytes(b'')
         self.edit_json('sources/sources.json', lambda d: d['sources'].update({'test-feed': dict(service='twitch', url='https://example.com/feed.txt', data_type='subnets', trust='official', method='https-cidr', last_checked=None, last_updated=None, auto_update=True, records=[], notes='Test fixture only')}))
         previous = (self.root / 'subnets/telegram.txt').read_bytes()
         def downloader(url):
@@ -182,10 +185,41 @@ class RepositoryTests(unittest.TestCase):
                 fetch(response.url)
 
     def test_new_service_discovered(self):
-        self.edit_json('services.json', lambda d: d['services'].update(example=dict(enabled=True, auto_update=False, domains='domains/example.txt', subnets='subnets/example.txt', sources=['example-source'])))
+        self.edit_json('services.json', lambda d: d['services'].update(example=dict(enabled=True, auto_update=False, domains='domains/example.txt', sources=['example-source'])))
         self.edit_json('sources/sources.json', lambda d: d['sources'].update({'example-source': dict(service='example', url='https://example.com/', data_type='domains', trust='official', method='manual-review', last_checked='2026-11-11', last_updated='2026-11-11', auto_update=False, records=['example.com'], notes='Test fixture only')}))
         (self.root / 'domains/example.txt').write_bytes(b'example.com\n')
-        (self.root / 'subnets/example.txt').write_bytes(b'')
         build(self.root)
         validate(self.root)
         self.assertIn('example.com', (self.root / 'domains/all.txt').read_text())
+        self.assertFalse((self.root / 'subnets/example.txt').exists())
+
+    def test_domains_only_services_survive_build_and_update(self):
+        def no_network(url):
+            raise OSError('offline')
+        build(self.root)
+        validate(self.root)
+        update(self.root, downloader=no_network)
+        for sid in ('twitch', 'albion'):
+            self.assertFalse((self.root / f'subnets/{sid}.txt').exists())
+
+    def test_all_services_can_omit_subnets(self):
+        registry = read_json(self.root / 'services.json')
+        document = read_json(self.root / 'sources/sources.json')
+        for service in registry['services'].values():
+            service.pop('subnets', None)
+            service.pop('broad_subnets', None)
+            service['auto_update'] = False
+            service['sources'] = [i for i in service['sources'] if document['sources'][i]['data_type'] != 'subnets']
+        document['sources'] = {i: s for i, s in document['sources'].items() if s['data_type'] != 'subnets'}
+        (self.root / 'services.json').write_text(json.dumps(registry), encoding='utf-8')
+        (self.root / 'sources/sources.json').write_text(json.dumps(document), encoding='utf-8')
+        build(self.root)
+        validate(self.root)
+        self.assertEqual((self.root / 'subnets/all.txt').read_bytes(), b'')
+
+    def test_subnet_source_cannot_create_an_unrequested_list(self):
+        self.edit_json('services.json', lambda d: d['services']['twitch'].update(auto_update=True, sources=d['services']['twitch']['sources'] + ['test-feed']))
+        self.edit_json('sources/sources.json', lambda d: d['sources'].update({'test-feed': dict(service='twitch', url='https://example.com/feed.txt', data_type='subnets', trust='official', method='https-cidr', last_checked=None, last_updated=None, auto_update=True, records=[], notes='Test fixture only')}))
+        with self.assertRaisesRegex(ValueError, 'requires a registered list'):
+            update(self.root, downloader=lambda url: '8.8.8.8/32\n')
+        self.assertFalse((self.root / 'subnets/twitch.txt').exists())

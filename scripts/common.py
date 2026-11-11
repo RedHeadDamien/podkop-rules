@@ -56,6 +56,8 @@ def load_config(root):
             if type(service.get(flag)) is not bool:
                 raise ValueError(f'{sid}: {flag} must be boolean')
         for kind in ('domains', 'subnets'):
+            if kind == 'subnets' and kind not in service:
+                continue
             expected = f'{kind}/{sid}.txt'
             if service.get(kind) != expected:
                 raise ValueError(f'{sid}: {kind} must be {expected}')
@@ -74,6 +76,8 @@ def load_config(root):
         broad = service.get('broad_subnets', [])
         if not isinstance(broad, list) or len(broad) != len(set(broad)):
             raise ValueError(f'{sid}: broad_subnets must be a unique list')
+        if broad and 'subnets' not in service:
+            raise ValueError(f'{sid}: broad_subnets requires a registered subnet list')
         for value in broad:
             subnet(value, broad_subnets=broad)
             if ipaddress.ip_network(value).prefixlen >= 16:
@@ -99,6 +103,8 @@ def load_config(root):
             raise ValueError(f'{source_id}: non-user source requires HTTPS URL')
         if source['data_type'] not in ('domains', 'subnets', 'context'):
             raise ValueError(f'{source_id}: invalid data_type')
+        if source['data_type'] != 'context' and source['data_type'] not in services[sid]:
+            raise ValueError(f'{source_id}: {source["data_type"]} source requires a registered list')
         if source['trust'] not in ('official', 'primary-research', 'user-supplied'):
             raise ValueError(f'{source_id}: unsupported trust')
         for key in ('last_checked', 'last_updated'):
@@ -217,7 +223,7 @@ def combined(root, services, overrides=None):
     for kind in ('domains', 'subnets'):
         values = []
         for sid, service in services.items():
-            if service['enabled']:
+            if service['enabled'] and kind in service:
                 key = (sid, kind)
                 values.extend(overrides[key] if key in overrides else read_list(
                     root / service[kind], kind, strict=False, broad_subnets=service.get('broad_subnets', [])))
@@ -233,6 +239,8 @@ def validate(root, *, check_combined=True, overrides=None, source_document=None)
     overrides = overrides or {}
     for sid, service in services.items():
         for kind in ('domains', 'subnets'):
+            if kind not in service:
+                continue
             key = (sid, kind)
             values = overrides[key] if key in overrides else read_list(
                 root / service[kind], kind, broad_subnets=service.get('broad_subnets', []))

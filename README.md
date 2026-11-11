@@ -22,7 +22,7 @@ KinoPub добавлен по пользовательскому запросу:
 
 ## Подключение
 
-В существующей секции VPN укажите доменный Raw URL в поле **«Внешние списки доменов»**, а IPv4 URL — в **«Внешние списки подсетей»**. Можно использовать пару `all.txt` либо файлы отдельных сервисов. Пустые файлы подсетей Twitch/Albion подключать не нужно: Podkop считает пустую загрузку ошибкой. [Пошаговая инструкция](docs/podkop-setup.md).
+В существующей секции VPN укажите доменный Raw URL в поле **«Внешние списки доменов»**, а IPv4 URL, если у сервиса есть IP-список, — в **«Внешние списки подсетей»**. Можно использовать пару `all.txt` либо файлы отдельных сервисов. У Twitch и Albion есть только доменные файлы; списки подсетей для них не создаются до отдельного запроса пользователя. [Пошаговая инструкция](docs/podkop-setup.md).
 
 Адрес репозитория из Git remote `origin`: [RedHeadDamien/podkop-rules](https://github.com/RedHeadDamien/podkop-rules). Raw URL ниже соответствуют этому адресу и ветке `main`; доступность опубликованных файлов при обновлении README не проверялась.
 
@@ -30,8 +30,8 @@ KinoPub добавлен по пользовательскому запросу:
 |---|---|---|
 | Все | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/domains/all.txt` | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/subnets/all.txt` |
 | Telegram | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/domains/telegram.txt` | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/subnets/telegram.txt` |
-| Twitch | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/domains/twitch.txt` | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/subnets/twitch.txt` (пустой) |
-| Albion Online | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/domains/albion.txt` | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/subnets/albion.txt` (пустой) |
+| Twitch | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/domains/twitch.txt` | Нет IP-списка |
+| Albion Online | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/domains/albion.txt` | Нет IP-списка |
 | KinoPub | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/domains/kinopub.txt` | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/subnets/kinopub.txt` |
 
 ## Формат и устройство проекта
@@ -54,6 +54,8 @@ docs/                         подключение, совместимость
 .github/workflows/            обновление и валидация
 AGENTS.md                     постоянный процесс сопровождения через Codex
 ```
+
+В `services.json` поле `domains` обязательно, а `subnets` указывается только при наличии запрошенного IP-списка. Для сервиса без IP-списка поле `subnets` отсутствует; пустой файл-заглушка не нужен. Сборка и проверка пропускают отсутствующий тип списка, автообновление не создаёт его. Источник типа `subnets` без зарегистрированного файла считается ошибкой. IP-список добавляется только по отдельному запросу пользователя. Общий `subnets/all.txt` формируется из существующих включённых IP-списков.
 
 Общий модуль `common.py` добавлен для единых правил валидации во всех трёх скриптах. Внешних Python-зависимостей нет. При сборке подсети не укрупняются: объединение удаляет точные дубликаты и отклоняет перекрывающиеся диапазоны. Вложенные CIDR KinoPub удалены заранее без изменения покрытия. Приватные/специальные диапазоны запрещены; префиксы шире `/16` запрещены по умолчанию. Для KinoPub задан список точных `broad_subnets` по прямому пользовательскому запросу с сохранённым исходным вводом. Произвольные широкие сети не разрешаются.
 
@@ -96,7 +98,7 @@ Push через `GITHUB_TOKEN` не запускает обычный push-workf
 
 Откройте репозиторий в Codex и напишите «Добавь Discord», «Обнови Telegram», «Проверь актуальность всех списков» либо «Удали Twitch». Порядок исследования, регистрации и проверки задан в [AGENTS.md](AGENTS.md).
 
-При ручной работе: подтвердите официальные домены, API, CDN и необходимость IP; добавьте `domains/<id>.txt`, `subnets/<id>.txt`, источники с `records` и запись в `services.json`; пересоберите all.txt; запустите проверки; обновите таблицу и ограничения. Скрипты автоматически обнаруживают новый сервис по реестру. `enabled: false` исключает его из общих файлов. Без надёжного машинного источника ставьте `auto_update: false`.
+При ручной работе: подтвердите официальные домены, API и CDN; добавьте `domains/<id>.txt`, источники с `records` и запись в `services.json`. Файл `subnets/<id>.txt` и поле `subnets` добавляйте только по отдельному запросу на IP-список и при наличии данных; пустые заглушки не создавайте. Пересоберите all.txt, запустите проверки, обновите таблицу и ограничения. Скрипты автоматически обнаруживают новый сервис по реестру. `enabled: false` исключает его из общих файлов. Без надёжного машинного источника ставьте `auto_update: false`.
 
 ## Ограничения
 
@@ -106,7 +108,7 @@ Push через `GITHUB_TOKEN` не запускает обычный push-workf
 
 **KinoPub:** все присланные домены и IP сохранены с удалением только избыточных вложенных CIDR. Это вручную сопровождаемый пользовательский набор, а не официальный feed. Общие CDN, TMDB и `wp.com` могут затрагивать другие приложения. Адреса, транспорты и полнота покрытия на реальном клиенте не проверялись. [Подробности](docs/kinopub.md).
 
-**Albion Online:** включены сайт и подтверждённые DNS-имена входа Americas/Asia/Europe. Полного списка игровых серверов, IP, CDN и портов в проверенных официальных материалах нет. Подсети пусты намеренно. Вход в игру не доказывает маршрутизацию игровых UDP-сессий; региональные адреса за DDoS-защитой могут меняться. [Анализ соединений Windows 11/OpenWrt](docs/albion-network-analysis.md) необходим для дополнения игрового покрытия.
+**Albion Online:** включены сайт и подтверждённые DNS-имена входа Americas/Asia/Europe. Полного списка игровых серверов, IP, CDN и портов в проверенных официальных материалах нет. Файл подсетей отсутствует и будет добавлен только по отдельному запросу пользователя. Вход в игру не доказывает маршрутизацию игровых UDP-сессий; региональные адреса за DDoS-защитой могут меняться. [Анализ соединений Windows 11/OpenWrt](docs/albion-network-analysis.md) необходим для дополнения игрового покрытия.
 
 Зашифрованный DNS клиента, кэш DNS, прямой IP, IPv6 и сторонние прокси могут менять результат доменных правил. Работа VPN и задержки зависят от транспорта и маршрута; списки этого не исправляют. [Диагностика](docs/troubleshooting.md).
 

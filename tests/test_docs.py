@@ -17,5 +17,6 @@ class DocumentationTests(unittest.TestCase):
         services, _ = load_config(ROOT)
         readme = (ROOT / 'README.md').read_text(encoding='utf-8')
         for sid, service in services.items():
-            counts = [len(read_list(ROOT / service[kind], kind, broad_subnets=service.get('broad_subnets', []))) for kind in ('domains', 'subnets')]
+            counts = [len(read_list(ROOT / service[kind], kind, broad_subnets=service.get('broad_subnets', [])))
+                      if kind in service else 0 for kind in ('domains', 'subnets')]
             self.assertIn(f'| {service.get("name", sid)} | {counts[0]} | {counts[1]} |', readme)
