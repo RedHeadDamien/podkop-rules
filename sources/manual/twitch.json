@@ -1,0 +1,9 @@
+{
+  "service": "twitch",
+  "domains": [
+    "ext-twitch.tv",
+    "twitchsvc.net"
+  ],
+  "origin": "User commit fdc5290eae74f232cd621cc865c57321bacca7a4",
+  "independently_verified": false
+}

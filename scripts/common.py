@@ -71,6 +71,17 @@ def load_config(root):
         for source_id in ids:
             if source_id not in evidence or evidence[source_id].get('service') != sid:
                 raise ValueError(f'{sid}: unknown or mismatched source {source_id}')
+        broad = service.get('broad_subnets', [])
+        if not isinstance(broad, list) or len(broad) != len(set(broad)):
+            raise ValueError(f'{sid}: broad_subnets must be a unique list')
+        for value in broad:
+            subnet(value, broad_subnets=broad)
+            if ipaddress.ip_network(value).prefixlen >= 16:
+                raise ValueError(f'{sid}: unnecessary broad subnet exception: {value}')
+            if not any(evidence[i].get('trust') == 'user-supplied' and
+                       evidence[i].get('data_type') == 'subnets' and
+                       value in evidence[i].get('records', []) for i in ids):
+                raise ValueError(f'{sid}: broad subnet requires explicit user-supplied provenance: {value}')
         updates = [evidence[i] for i in ids if evidence[i].get('auto_update')]
         if service['auto_update'] != bool(updates):
             raise ValueError(f'{sid}: auto_update must match available automated sources')
@@ -81,10 +92,14 @@ def load_config(root):
         for key in ('url', 'data_type', 'trust', 'method', 'last_checked', 'last_updated', 'auto_update', 'records', 'notes'):
             if key not in source:
                 raise ValueError(f'{source_id}: missing {key}')
-        https_url(source['url'])
+        user_supplied = source['trust'] == 'user-supplied'
+        if source['url'] is not None:
+            https_url(source['url'])
+        elif not user_supplied:
+            raise ValueError(f'{source_id}: non-user source requires HTTPS URL')
         if source['data_type'] not in ('domains', 'subnets', 'context'):
             raise ValueError(f'{source_id}: invalid data_type')
-        if source['trust'] not in ('official', 'primary-research'):
+        if source['trust'] not in ('official', 'primary-research', 'user-supplied'):
             raise ValueError(f'{source_id}: unsupported trust')
         for key in ('last_checked', 'last_updated'):
             if source[key] is not None:
@@ -96,10 +111,23 @@ def load_config(root):
         if source['data_type'] == 'context':
             if source['records']:
                 raise ValueError(f'{source_id}: context source cannot approve routes')
-        elif source['records'] != normalize(source['records'], source['data_type']):
+        elif source['records'] != normalize(source['records'], source['data_type'],
+                                            broad_subnets=services[sid].get('broad_subnets', [])):
             raise ValueError(f'{source_id}: records must be canonical, sorted and unique')
-        if source['method'] not in ('https-cidr', 'manual-review'):
+        if source['method'] not in ('https-cidr', 'manual-review', 'user-input'):
             raise ValueError(f'{source_id}: unsupported source method')
+        if user_supplied or source['method'] == 'user-input':
+            if not user_supplied or source['method'] != 'user-input' or source['auto_update']:
+                raise ValueError(f'{source_id}: user input must be manual and explicitly labelled')
+            expected = f'sources/manual/{sid}.json'
+            if source.get('input_file') != expected:
+                raise ValueError(f'{source_id}: input_file must be {expected}')
+            path = root / expected
+            if path.is_symlink() or not path.is_file() or path.resolve().parent != (root / 'sources/manual').resolve():
+                raise ValueError(f'{source_id}: missing or unsafe input snapshot')
+            submitted = read_json(path).get(source['data_type'], [])
+            if not set(source['records']).issubset(submitted):
+                raise ValueError(f'{source_id}: records absent from user input snapshot')
         if source['auto_update'] and (source['method'] != 'https-cidr' or source['data_type'] != 'subnets'):
             raise ValueError(f'{source_id}: unsupported automatic parser')
     return services, sources
@@ -114,7 +142,7 @@ def domain(value):
     return value
 
 
-def subnet(value, *, allow_ipv6=False):
+def subnet(value, *, allow_ipv6=False, broad_subnets=()):
     if '/' not in value:
         raise ValueError(f'CIDR prefix required: {value}')
     network = ipaddress.ip_network(value, strict=True)
@@ -131,13 +159,13 @@ def subnet(value, *, allow_ipv6=False):
                '203.0.113.0/24', '224.0.0.0/3')
     if network.version == 4 and any(network.overlaps(ipaddress.ip_network(n)) for n in special):
         raise ValueError(f'Network overlaps special-use space: {value}')
-    if network.prefixlen < (16 if network.version == 4 else 32):
+    if network.prefixlen < (16 if network.version == 4 else 32) and value not in broad_subnets:
         raise ValueError(f'Network too broad; requires separate policy review: {value}')
     return value
 
 
-def normalize(values, kind):
-    check = domain if kind == 'domains' else subnet
+def normalize(values, kind, *, broad_subnets=()):
+    check = domain if kind == 'domains' else lambda value: subnet(value, broad_subnets=broad_subnets)
     result = sorted({check(value) for value in values})
     if kind == 'subnets':
         nets = sorted((ipaddress.ip_network(n) for n in result), key=lambda n: (n.version, int(n.network_address), n.prefixlen))
@@ -151,12 +179,12 @@ def encode(values):
     return (''.join(f'{value}\n' for value in values)).encode('ascii')
 
 
-def read_list(path, kind, *, strict=True):
+def read_list(path, kind, *, strict=True, broad_subnets=()):
     raw = path.read_bytes()
     try:
         text = raw.decode('ascii')
         lines = text.splitlines()
-        result = normalize(lines, kind)
+        result = normalize(lines, kind, broad_subnets=broad_subnets)
         if strict and raw != encode(result):
             raise ValueError('Expected sorted unique ASCII records with LF and final newline; no blank lines/comments')
         return result
@@ -191,8 +219,10 @@ def combined(root, services, overrides=None):
         for sid, service in services.items():
             if service['enabled']:
                 key = (sid, kind)
-                values.extend(overrides[key] if key in overrides else read_list(root / service[kind], kind, strict=False))
-        outputs[kind] = normalize(values, kind)
+                values.extend(overrides[key] if key in overrides else read_list(
+                    root / service[kind], kind, strict=False, broad_subnets=service.get('broad_subnets', [])))
+        broad = [n for s in services.values() if s['enabled'] for n in s.get('broad_subnets', [])]
+        outputs[kind] = normalize(values, kind, broad_subnets=broad)
     return outputs
 
 
@@ -204,7 +234,8 @@ def validate(root, *, check_combined=True, overrides=None, source_document=None)
     for sid, service in services.items():
         for kind in ('domains', 'subnets'):
             key = (sid, kind)
-            values = overrides[key] if key in overrides else read_list(root / service[kind], kind)
+            values = overrides[key] if key in overrides else read_list(
+                root / service[kind], kind, broad_subnets=service.get('broad_subnets', []))
             approved = {record for i in service['sources'] for record in evidence[i]['records'] if evidence[i]['data_type'] == kind}
             missing = set(values) - approved
             if missing:
@@ -213,7 +244,8 @@ def validate(root, *, check_combined=True, overrides=None, source_document=None)
     if check_combined:
         for kind, values in outputs.items():
             path = root / kind / 'all.txt'
-            actual = read_list(path, kind)
+            broad = [n for s in services.values() if s['enabled'] for n in s.get('broad_subnets', [])]
+            actual = read_list(path, kind, broad_subnets=broad)
             if actual != values:
                 raise ValueError(f'{path}: stale combined list; run build_lists.py')
     return outputs

@@ -1,9 +1,9 @@
-telegram.org
-t.me
-telegram.me
-telegram.dog
-telegra.ph
-graph.org
-telesco.pe
-telegram-cdn.org
 cdn-telegram.org
+graph.org
+t.me
+telegra.ph
+telegram-cdn.org
+telegram.dog
+telegram.me
+telegram.org
+telesco.pe

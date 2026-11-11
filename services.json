@@ -11,7 +11,8 @@
         "telegram-links",
         "telegram-api",
         "telegram-cidr",
-        "telegram-calls"
+        "telegram-calls",
+        "telegram-user-domains"
       ]
     },
     "twitch": {
@@ -24,7 +25,8 @@
         "twitch-home",
         "twitch-integration",
         "twitch-api",
-        "twitch-chat"
+        "twitch-chat",
+        "twitch-user-domains"
       ]
     },
     "albion": {
@@ -37,6 +39,28 @@
         "albion-faq",
         "albion-regions",
         "albion-network"
+      ]
+    },
+    "kinopub": {
+      "name": "KinoPub",
+      "enabled": true,
+      "domains": "domains/kinopub.txt",
+      "subnets": "subnets/kinopub.txt",
+      "auto_update": false,
+      "sources": [
+        "kinopub-user-domains",
+        "kinopub-user-subnets"
+      ],
+      "broad_subnets": [
+        "104.16.0.0/12",
+        "13.32.0.0/12",
+        "15.236.0.0/14",
+        "172.64.0.0/13",
+        "35.176.0.0/13",
+        "44.192.0.0/10",
+        "52.0.0.0/10",
+        "57.0.0.0/8",
+        "8.32.0.0/11"
       ]
     }
   }

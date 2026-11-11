@@ -1,6 +1,6 @@
-twitch.tv
-ttvnw.net
-jtvnw.net
-twitchcdn.net
 ext-twitch.tv
+jtvnw.net
+ttvnw.net
+twitch.tv
+twitchcdn.net
 twitchsvc.net
