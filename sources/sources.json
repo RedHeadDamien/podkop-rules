@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "sources": {
+    "telegram-links": {
+      "service": "telegram",
+      "url": "https://core.telegram.org/api/links",
+      "data_type": "domains",
+      "trust": "official",
+      "method": "manual-review",
+      "last_checked": "2026-11-11",
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [
+        "t.me",
+        "telegram.dog",
+        "telegram.me"
+      ],
+      "notes": "Официальные deep links; поддомены включаются domain_suffix."
+    },
+    "telegram-api": {
+      "service": "telegram",
+      "url": "https://core.telegram.org/",
+      "data_type": "domains",
+      "trust": "official",
+      "method": "manual-review",
+      "last_checked": "2026-11-11",
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [
+        "telegram.org"
+      ],
+      "notes": "API, web.telegram.org, api.telegram.org и медиаподдомены покрыты корневым доменом; MTProto также использует прямые IP."
+    },
+    "telegram-cidr": {
+      "service": "telegram",
+      "url": "https://core.telegram.org/resources/cidr.txt",
+      "data_type": "subnets",
+      "trust": "official",
+      "method": "https-cidr",
+      "last_checked": "2026-11-11",
+      "last_updated": "2026-11-11",
+      "auto_update": true,
+      "records": [
+        "149.154.160.0/20",
+        "185.76.151.0/24",
+        "91.105.192.0/23",
+        "91.108.12.0/22",
+        "91.108.16.0/22",
+        "91.108.20.0/22",
+        "91.108.4.0/22",
+        "91.108.56.0/22",
+        "91.108.8.0/22"
+      ],
+      "notes": "Официальный CIDR-файл. IPv6 проверяется синтаксически, но исключается из публикации для Podkop 0.7.22. P2P-адреса собеседников не покрываются."
+    },
+    "telegram-calls": {
+      "service": "telegram",
+      "url": "https://core.telegram.org/api/end-to-end/voice-calls",
+      "data_type": "context",
+      "trust": "official",
+      "method": "manual-review",
+      "last_checked": "2026-11-11",
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [],
+      "notes": "Историческое описание вызовов содержит ссылку на актуальный протокол; P2P и UDP требуют отдельной проверки. Подсети не гарантируют все варианты звонков."
+    },
+    "twitch-home": {
+      "service": "twitch",
+      "url": "https://www.twitch.tv/",
+      "data_type": "domains",
+      "trust": "official",
+      "method": "manual-review",
+      "last_checked": "2026-11-11",
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [
+        "jtvnw.net",
+        "ttvnw.net",
+        "twitch.tv"
+      ],
+      "notes": "Официальный HTML получен локально; ссылки static-cdn.jtvnw.net и usher.ttvnw.net. Доменные суффиксы покрывают API, авторизацию и чат."
+    },
+    "twitch-integration": {
+      "service": "twitch",
+      "url": "https://creators.vrchat.com/worlds/udon/video-players/www-whitelist/",
+      "data_type": "domains",
+      "trust": "official",
+      "method": "manual-review",
+      "last_checked": "2026-11-11",
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [
+        "twitchcdn.net"
+      ],
+      "notes": "Официальная документация интеграции VRChat относит twitchcdn.net к Twitch.TV. Это независимое подтверждение интегратора, не список от Twitch."
+    },
+    "twitch-api": {
+      "service": "twitch",
+      "url": "https://dev.twitch.tv/docs/api/reference/",
+      "data_type": "context",
+      "trust": "official",
+      "method": "manual-review",
+      "last_checked": "2026-11-11",
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [],
+      "notes": "Официальная документация API; общего надёжного CIDR-feed для зрительского трафика не установлено. CloudFront и Fastly целиком не добавляются."
+    },
+    "twitch-chat": {
+      "service": "twitch",
+      "url": "https://dev.twitch.tv/docs/chat/",
+      "data_type": "context",
+      "trust": "official",
+      "method": "manual-review",
+      "last_checked": "2026-11-11",
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [],
+      "notes": "Чат/API покрываются twitch.tv; внешние расширения и новые сторонние CDN требуют анализа HAR."
+    },
+    "albion-faq": {
+      "service": "albion",
+      "url": "https://albiononline.com/frequently-asked-questions",
+      "data_type": "domains",
+      "trust": "official",
+      "method": "manual-review",
+      "last_checked": "2026-11-11",
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [
+        "albiononline.com"
+      ],
+      "notes": "Официальные сайт, загрузка и учётная запись; /download при прямой проверке вернул HTTP 403. Отдельные CDN-домены без подтверждения не добавлены."
+    },
+    "albion-regions": {
+      "service": "albion",
+      "url": "https://forum.albiononline.com/index.php/Thread/198781-server-ip-address/",
+      "data_type": "domains",
+      "trust": "official",
+      "method": "manual-review",
+      "last_checked": "2026-11-11",
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [
+        "live02-loginserver.sg.albion.zone",
+        "live03-loginserver.ams.albion.zone",
+        "loginserver.live.albion.zone"
+      ],
+      "notes": "Ответ разработчика с диагностическими DNS-именами Americas, Asia, Europe. Это не полный перечень игровых сессий и не доказательство исключительного владения IP."
+    },
+    "albion-network": {
+      "service": "albion",
+      "url": "https://forum.albiononline.com/index.php/Thread/221517-Understanding-Albion-Online-Connection-Issues/",
+      "data_type": "context",
+      "trust": "official",
+      "method": "manual-review",
+      "last_checked": "2026-11-11",
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [],
+      "notes": "Заявление разработчиков: единый мир на регион и глобальный слой DDoS-защиты. Актуальные CIDR и полный перечень транспортов не опубликованы в проверенных материалах; нужен захват соединений."
+    }
+  }
+}

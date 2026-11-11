@@ -1,0 +1,16 @@
+# Подключение списков к Podkop 0.7.22
+
+Подписи ниже подтверждены [LuCI section.js](https://github.com/itdoginfo/podkop/blob/0.7.22/luci-app-podkop/htdocs/luci-static/resources/view/podkop/section.js) и [ru/podkop.po](https://github.com/itdoginfo/podkop/blob/0.7.22/luci-app-podkop/po/ru/podkop.po). Это инструкция для самостоятельного применения пользователем. Проект не изменяет роутер.
+
+1. Опубликуйте репозиторий и откройте нужные Raw-ссылки из README. URL должен отдавать текст без страницы GitHub, авторизации или HTML-ошибки. `OWNER` замените логином владельца, `main` — опубликованной веткой.
+2. Откройте Podkop в LuCI и выберите существующую секцию, направленную в нужный VPN. Действующий VLESS Reality/outbound должен уже работать.
+3. В поле **«Внешние списки доменов» / Remote Domain Lists** (`remote_domain_lists`) добавьте `https://raw.githubusercontent.com/OWNER/podkop-rules/main/domains/all.txt`. Альтернатива — отдельные доменные URL Telegram, Twitch и Albion.
+4. В поле **«Внешние списки подсетей» / Remote Subnet Lists** (`remote_subnet_lists`) добавьте `https://raw.githubusercontent.com/OWNER/podkop-rules/main/subnets/all.txt` либо `subnets/telegram.txt`.
+5. Файлы `subnets/twitch.txt` и `subnets/albion.txt` пусты: не добавляйте их в интерфейс. После появления подтверждённых записей это ограничение можно пересмотреть.
+6. Сохраните и примените настройки средствами LuCI. Не подключайте одновременно общие и те же сервисные файлы без необходимости.
+7. В настройках проверьте **«Частота обновления списков» / List Update Frequency** (`update_interval`). В tag 0.7.22 доступны `1h`, `3h`, `12h`, `1d`, `3d`. Это частота загрузки роутером, отдельно от расписания GitHub Actions.
+8. Проверьте журнал Podkop, загрузку файлов и фактический маршрут клиента. Для ручного обновления предусмотрена команда `podkop list_update`; она обновляет состояние работающего Podkop, поэтому выполняется пользователем при необходимости.
+
+Один домен на строку покрывает также поддомены. CIDR нужен для прямых подключений по IPv4; домен не превращается автоматически в полный список IP сервиса. Не вставляйте CIDR в доменное поле и наоборот. Не используйте ссылки `github.com/.../blob/...`.
+
+Текстовые списки проекта рассчитаны на IPv4-путь Podkop 0.7.22. IPv6, UDP и игровой трафик нужно проверять отдельно. Необходимые DNS-запросы должны проходить через DNS-путь Podkop; собственный DoH приложения может обходить его. [Совместимость](podkop-compatibility.md), [диагностика](troubleshooting.md).

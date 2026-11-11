@@ -1,0 +1,11 @@
+.research/
+__pycache__/
+*.py[cod]
+.venv/
+.cache/
+*.tmp
+*.pcap*
+update-report.json
+.env
+.env.*
+!.env.example

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "services": {
+    "telegram": {
+      "name": "Telegram",
+      "enabled": true,
+      "domains": "domains/telegram.txt",
+      "subnets": "subnets/telegram.txt",
+      "auto_update": true,
+      "sources": [
+        "telegram-links",
+        "telegram-api",
+        "telegram-cidr",
+        "telegram-calls"
+      ]
+    },
+    "twitch": {
+      "name": "Twitch",
+      "enabled": true,
+      "domains": "domains/twitch.txt",
+      "subnets": "subnets/twitch.txt",
+      "auto_update": false,
+      "sources": [
+        "twitch-home",
+        "twitch-integration",
+        "twitch-api",
+        "twitch-chat"
+      ]
+    },
+    "albion": {
+      "name": "Albion Online",
+      "enabled": true,
+      "domains": "domains/albion.txt",
+      "subnets": "subnets/albion.txt",
+      "auto_update": false,
+      "sources": [
+        "albion-faq",
+        "albion-regions",
+        "albion-network"
+      ]
+    }
+  }
+}

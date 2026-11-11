@@ -1,0 +1,4 @@
+albiononline.com
+live02-loginserver.sg.albion.zone
+live03-loginserver.ams.albion.zone
+loginserver.live.albion.zone
