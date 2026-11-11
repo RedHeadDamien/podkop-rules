@@ -289,6 +289,59 @@
       ],
       "input_file": "sources/manual/twitch.json",
       "notes": "Существующие пользовательские дополнения сохранены без удаления. Источник — пользовательский commit; независимая проверка доменов не выполнена."
+    },
+    "albion-user-capture-domains": {
+      "service": "albion",
+      "url": null,
+      "data_type": "domains",
+      "trust": "user-supplied",
+      "method": "user-input",
+      "last_checked": null,
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [
+        "albion1.battleye.com",
+        "battleye.becdn.net",
+        "cdn.battleye.com",
+        "live01-win-status.dc02.albion.zone",
+        "live02-win-status.sg.albion.zone",
+        "live03-win-01.ams.albion.zone",
+        "live03-win-status.ams.albion.zone",
+        "master1.battleye.com"
+      ],
+      "input_file": "sources/manual/albion.json",
+      "notes": "Зависимости обнаружены в пользовательских DNS-захватах: статусы трёх регионов, CNAME входа Europe и точные имена BattlEye/CDN. Независимая официальная проверка не выполнена. Ключ Podkop работает через Happ по сообщению пользователя; добавление доменов не доказывает исправление UDP на роутере."
+    },
+    "albion-user-capture-subnets": {
+      "service": "albion",
+      "url": null,
+      "data_type": "subnets",
+      "trust": "user-supplied",
+      "method": "user-input",
+      "last_checked": null,
+      "last_updated": "2026-11-11",
+      "auto_update": false,
+      "records": [
+        "185.131.64.122/32",
+        "193.169.238.102/32",
+        "193.169.238.103/32",
+        "193.169.238.110/32",
+        "193.169.238.210/32",
+        "193.169.238.248/32",
+        "193.169.238.96/32",
+        "3.164.68.124/32",
+        "3.164.68.54/32",
+        "3.164.68.73/32",
+        "3.164.68.8/32",
+        "5.188.125.60/32",
+        "5.45.187.118/32",
+        "57.129.90.115/32",
+        "8.47.69.1/32",
+        "8.6.112.1/32",
+        "92.223.84.84/32"
+      ],
+      "input_file": "sources/manual/albion.json",
+      "notes": "По отдельному запросу пользователя добавлены только точные IPv4 /32 из DNS-наблюдений Albion/BattlEye в захватах 111/222/333. Часть подтверждается пакетами без Happ, часть видна только в DNS успешных сеансов через Happ. Принадлежность исключительно игре и стабильность IP не подтверждены. Есть общие CDN и античит; файл сопровождается вручную, не гарантирует исправление UDP через роутер."
     }
   }
 }

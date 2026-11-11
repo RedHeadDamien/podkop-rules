@@ -217,6 +217,18 @@ def atomic_write(path, content):
     return True
 
 
+def remove_covered_subnets(values):
+    """Remove only duplicates/contained CIDRs; never merge adjacent networks."""
+    networks = sorted({ipaddress.ip_network(value, strict=True) for value in values},
+                      key=lambda network: (network.version, int(network.network_address), network.prefixlen))
+    kept = []
+    for network in networks:
+        if kept and network.version == kept[-1].version and network.subnet_of(kept[-1]):
+            continue
+        kept.append(network)
+    return sorted(str(network) for network in kept)
+
+
 def combined(root, services, overrides=None):
     overrides = overrides or {}
     outputs = {}
@@ -228,6 +240,8 @@ def combined(root, services, overrides=None):
                 values.extend(overrides[key] if key in overrides else read_list(
                     root / service[kind], kind, strict=False, broad_subnets=service.get('broad_subnets', [])))
         broad = [n for s in services.values() if s['enabled'] for n in s.get('broad_subnets', [])]
+        if kind == 'subnets':
+            values = remove_covered_subnets(values)
         outputs[kind] = normalize(values, kind, broad_subnets=broad)
     return outputs
 

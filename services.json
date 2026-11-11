@@ -36,8 +36,11 @@
       "sources": [
         "albion-faq",
         "albion-regions",
-        "albion-network"
-      ]
+        "albion-network",
+        "albion-user-capture-domains",
+        "albion-user-capture-subnets"
+      ],
+      "subnets": "subnets/albion.txt"
     },
     "kinopub": {
       "name": "KinoPub",

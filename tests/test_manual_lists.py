@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.common import ROOT, load_config, normalize, read_json, read_list, subnet, validate
+from scripts.common import ROOT, combined, load_config, normalize, read_json, read_list, remove_covered_subnets, subnet, validate
 
 
 class ManualListTests(unittest.TestCase):
@@ -70,3 +70,33 @@ class ManualListTests(unittest.TestCase):
         result = combined(ROOT, services)
         self.assertNotIn('kino.pub', result['domains'])
         self.assertNotIn('57.0.0.0/8', result['subnets'])
+
+    def test_albion_ips_are_exact_user_observations(self):
+        services, document = load_config(ROOT)
+        snapshot = read_json(ROOT / 'sources/manual/albion.json')
+        values = read_list(ROOT / services['albion']['subnets'], 'subnets')
+        self.assertEqual(len(values), 17)
+        self.assertEqual(values, snapshot['subnets'])
+        self.assertEqual(set(values), set(snapshot['ip_evidence']))
+        self.assertTrue(all(ipaddress.ip_network(value).prefixlen == 32 for value in values))
+        source = document['sources']['albion-user-capture-subnets']
+        self.assertEqual(source['trust'], 'user-supplied')
+        self.assertFalse(source['auto_update'])
+
+    def test_combined_subnet_coverage_and_disabled_parent(self):
+        services, _ = load_config(ROOT)
+        values = [value for service in services.values() if service['enabled'] and 'subnets' in service
+                  for value in read_list(ROOT / service['subnets'], 'subnets', broad_subnets=service.get('broad_subnets', []))]
+        output = combined(ROOT, services)['subnets']
+        def coverage(items):
+            return list(ipaddress.collapse_addresses(ipaddress.ip_network(value) for value in items))
+        self.assertEqual(coverage(values), coverage(output))
+        self.assertNotIn('57.129.90.115/32', output)
+        services['kinopub']['enabled'] = False
+        output = combined(ROOT, services)['subnets']
+        self.assertIn('57.129.90.115/32', output)
+        self.assertNotIn('57.0.0.0/8', output)
+
+    def test_covered_subnet_removal_does_not_merge_adjacent(self):
+        values = ['91.108.4.0/24', '91.108.5.0/24', '91.108.4.1/32', '91.108.4.0/24']
+        self.assertEqual(remove_covered_subnets(values), ['91.108.4.0/24', '91.108.5.0/24'])

@@ -199,7 +199,7 @@ class RepositoryTests(unittest.TestCase):
         build(self.root)
         validate(self.root)
         update(self.root, downloader=no_network)
-        for sid in ('twitch', 'albion'):
+        for sid in ('twitch',):
             self.assertFalse((self.root / f'subnets/{sid}.txt').exists())
 
     def test_all_services_can_omit_subnets(self):

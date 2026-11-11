@@ -1,0 +1,701 @@
+{
+  "service": "albion",
+  "received_on": "2026-11-11",
+  "origin": "User-provided Wireshark packet CSV exports in this conversation",
+  "domains": [
+    "albion1.battleye.com",
+    "battleye.becdn.net",
+    "cdn.battleye.com",
+    "live01-win-status.dc02.albion.zone",
+    "live02-win-status.sg.albion.zone",
+    "live03-win-01.ams.albion.zone",
+    "live03-win-status.ams.albion.zone",
+    "master1.battleye.com"
+  ],
+  "independently_verified": false,
+  "captures": [
+    {
+      "filename": "111.csv",
+      "sha256": "bf5b154f419fcda30aeb5f6ee26394635a496e9805a1251886479d7f3d369a68",
+      "packet_rows": 2585,
+      "duration_seconds": 45.3894948
+    },
+    {
+      "filename": "222.csv",
+      "sha256": "c2fa1307be535b6f27607e1672fe06667fffef25a0b46447be085723ec8c48eb",
+      "packet_rows": 10452,
+      "duration_seconds": 86.2890051
+    },
+    {
+      "filename": "333.csv",
+      "sha256": "7cc3f91a8822cdbae12354c7561867d4d157351486d1ac4d69b629d6337ea34e",
+      "packet_rows": 8195,
+      "duration_seconds": 74.784917
+    }
+  ],
+  "dns_evidence": {
+    "albion1.battleye.com": [
+      {
+        "file": "111.csv",
+        "packet_number": 1122,
+        "time_seconds": 8.5650467,
+        "dns_summary": "Standard query response 0x7f80 A albion1.battleye.com CNAME master1.battleye.com A 57.129.90.115"
+      },
+      {
+        "file": "222.csv",
+        "packet_number": 3030,
+        "time_seconds": 15.7351732,
+        "dns_summary": "Standard query response 0x1d41 A albion1.battleye.com CNAME master1.battleye.com A 57.129.90.115"
+      },
+      {
+        "file": "333.csv",
+        "packet_number": 2059,
+        "time_seconds": 12.1752741,
+        "dns_summary": "Standard query response 0x1679 A albion1.battleye.com CNAME master1.battleye.com A 57.129.90.115"
+      }
+    ],
+    "battleye.becdn.net": [
+      {
+        "file": "111.csv",
+        "packet_number": 1095,
+        "time_seconds": 7.827413,
+        "dns_summary": "Standard query response 0x8f8a AAAA cdn.battleye.com CNAME battleye.becdn.net SOA ns1.bunnydns.com"
+      },
+      {
+        "file": "222.csv",
+        "packet_number": 2973,
+        "time_seconds": 14.3613259,
+        "dns_summary": "Standard query response 0xf77b AAAA cdn.battleye.com CNAME battleye.becdn.net SOA ns1.bunnydns.com"
+      },
+      {
+        "file": "333.csv",
+        "packet_number": 1961,
+        "time_seconds": 10.8469469,
+        "dns_summary": "Standard query response 0xc7d5 AAAA cdn.battleye.com CNAME battleye.becdn.net SOA ns1.bunnydns.com"
+      }
+    ],
+    "cdn.battleye.com": [
+      {
+        "file": "111.csv",
+        "packet_number": 1095,
+        "time_seconds": 7.827413,
+        "dns_summary": "Standard query response 0x8f8a AAAA cdn.battleye.com CNAME battleye.becdn.net SOA ns1.bunnydns.com"
+      },
+      {
+        "file": "222.csv",
+        "packet_number": 2973,
+        "time_seconds": 14.3613259,
+        "dns_summary": "Standard query response 0xf77b AAAA cdn.battleye.com CNAME battleye.becdn.net SOA ns1.bunnydns.com"
+      },
+      {
+        "file": "333.csv",
+        "packet_number": 1961,
+        "time_seconds": 10.8469469,
+        "dns_summary": "Standard query response 0xc7d5 AAAA cdn.battleye.com CNAME battleye.becdn.net SOA ns1.bunnydns.com"
+      }
+    ],
+    "live01-win-status.dc02.albion.zone": [
+      {
+        "file": "111.csv",
+        "packet_number": 1835,
+        "time_seconds": 22.7868223,
+        "dns_summary": "Standard query response 0xd02b A live01-win-status.dc02.albion.zone A 5.188.125.60"
+      },
+      {
+        "file": "222.csv",
+        "packet_number": 4032,
+        "time_seconds": 31.0514269,
+        "dns_summary": "Standard query response 0xfaa1 AAAA live01-win-status.dc02.albion.zone SOA ns-1784.awsdns-31.co.uk"
+      },
+      {
+        "file": "333.csv",
+        "packet_number": 3111,
+        "time_seconds": 27.3539991,
+        "dns_summary": "Standard query response 0x7bda AAAA live01-win-status.dc02.albion.zone SOA ns-1784.awsdns-31.co.uk"
+      }
+    ],
+    "live02-win-status.sg.albion.zone": [
+      {
+        "file": "111.csv",
+        "packet_number": 1829,
+        "time_seconds": 22.7761966,
+        "dns_summary": "Standard query response 0xff4a AAAA live02-win-status.sg.albion.zone SOA ns-162.awsdns-20.com"
+      },
+      {
+        "file": "222.csv",
+        "packet_number": 4030,
+        "time_seconds": 31.0453048,
+        "dns_summary": "Standard query response 0xdcb2 A live02-win-status.sg.albion.zone A 5.45.187.118"
+      },
+      {
+        "file": "333.csv",
+        "packet_number": 3090,
+        "time_seconds": 27.3168271,
+        "dns_summary": "Standard query response 0x468a AAAA live02-win-status.sg.albion.zone SOA ns-162.awsdns-20.com"
+      }
+    ],
+    "live03-win-01.ams.albion.zone": [
+      {
+        "file": "111.csv",
+        "packet_number": 2102,
+        "time_seconds": 27.5615995,
+        "dns_summary": "Standard query response 0xbe2a A live03-loginserver.ams.albion.zone CNAME live03-win-01.ams.albion.zone A 193.169.238.210"
+      },
+      {
+        "file": "222.csv",
+        "packet_number": 4462,
+        "time_seconds": 36.3120104,
+        "dns_summary": "Standard query response 0x3b38 A live03-loginserver.ams.albion.zone CNAME live03-win-01.ams.albion.zone A 193.169.238.210"
+      },
+      {
+        "file": "333.csv",
+        "packet_number": 3526,
+        "time_seconds": 32.7094369,
+        "dns_summary": "Standard query response 0x0048 A live03-loginserver.ams.albion.zone CNAME live03-win-01.ams.albion.zone A 193.169.238.210"
+      }
+    ],
+    "live03-win-status.ams.albion.zone": [
+      {
+        "file": "111.csv",
+        "packet_number": 1828,
+        "time_seconds": 22.7658508,
+        "dns_summary": "Standard query response 0x9ddb A live03-win-status.ams.albion.zone A 193.169.238.96"
+      },
+      {
+        "file": "222.csv",
+        "packet_number": 4034,
+        "time_seconds": 31.0514285,
+        "dns_summary": "Standard query response 0xc094 A live03-win-status.ams.albion.zone A 193.169.238.96"
+      },
+      {
+        "file": "333.csv",
+        "packet_number": 3112,
+        "time_seconds": 27.3540538,
+        "dns_summary": "Standard query response 0x6d8b AAAA live03-win-status.ams.albion.zone SOA ns-1875.awsdns-42.co.uk"
+      }
+    ],
+    "master1.battleye.com": [
+      {
+        "file": "111.csv",
+        "packet_number": 1122,
+        "time_seconds": 8.5650467,
+        "dns_summary": "Standard query response 0x7f80 A albion1.battleye.com CNAME master1.battleye.com A 57.129.90.115"
+      },
+      {
+        "file": "222.csv",
+        "packet_number": 3030,
+        "time_seconds": 15.7351732,
+        "dns_summary": "Standard query response 0x1d41 A albion1.battleye.com CNAME master1.battleye.com A 57.129.90.115"
+      },
+      {
+        "file": "333.csv",
+        "packet_number": 2059,
+        "time_seconds": 12.1752741,
+        "dns_summary": "Standard query response 0x1679 A albion1.battleye.com CNAME master1.battleye.com A 57.129.90.115"
+      }
+    ]
+  },
+  "user_reported_results": {
+    "111.csv": "Happ off: login failed",
+    "222.csv": "Happ with desktop key: login and several locations worked",
+    "333.csv": "Happ with Podkop key: login and several locations worked"
+  },
+  "limitations": "DNS observations establish use during these sessions, not exclusive ownership or complete regional coverage. Raw captures, client addresses, VPN endpoints and credentials are not copied to this repository.",
+  "subnets": [
+    "185.131.64.122/32",
+    "193.169.238.102/32",
+    "193.169.238.103/32",
+    "193.169.238.110/32",
+    "193.169.238.210/32",
+    "193.169.238.248/32",
+    "193.169.238.96/32",
+    "3.164.68.124/32",
+    "3.164.68.54/32",
+    "3.164.68.73/32",
+    "3.164.68.8/32",
+    "5.188.125.60/32",
+    "5.45.187.118/32",
+    "57.129.90.115/32",
+    "8.47.69.1/32",
+    "8.6.112.1/32",
+    "92.223.84.84/32"
+  ],
+  "ip_evidence": {
+    "185.131.64.122/32": [
+      {
+        "file": "111.csv",
+        "hostname": "cdn.battleye.com",
+        "packet_number": 1096,
+        "time_seconds": 7.8302393,
+        "dns_summary": "Standard query response 0x1ff2 A cdn.battleye.com CNAME battleye.becdn.net A 185.131.64.122",
+        "packets_to": 11,
+        "packets_from": 11
+      },
+      {
+        "file": "222.csv",
+        "hostname": "cdn.battleye.com",
+        "packet_number": 2974,
+        "time_seconds": 14.4104571,
+        "dns_summary": "Standard query response 0x4e76 A cdn.battleye.com CNAME battleye.becdn.net A 185.131.64.122",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "cdn.battleye.com",
+        "packet_number": 1962,
+        "time_seconds": 10.8988179,
+        "dns_summary": "Standard query response 0xb05e A cdn.battleye.com CNAME battleye.becdn.net A 185.131.64.122",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "193.169.238.102/32": [
+      {
+        "file": "222.csv",
+        "hostname": "live03-win-08.ams.albiononline.com",
+        "packet_number": 9336,
+        "time_seconds": 75.4204848,
+        "dns_summary": "Standard query response 0xd5d3 A live03-win-08.ams.albiononline.com A 193.169.238.102",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "live03-win-08.ams.albiononline.com",
+        "packet_number": 3930,
+        "time_seconds": 39.430429,
+        "dns_summary": "Standard query response 0x1848 A live03-win-08.ams.albiononline.com A 193.169.238.102",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "193.169.238.103/32": [
+      {
+        "file": "222.csv",
+        "hostname": "live03-win-12.ams.albiononline.com",
+        "packet_number": 4893,
+        "time_seconds": 43.3139865,
+        "dns_summary": "Standard query response 0x9d85 A live03-win-12.ams.albiononline.com A 193.169.238.103",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "live03-win-12.ams.albiononline.com",
+        "packet_number": 6448,
+        "time_seconds": 60.0018434,
+        "dns_summary": "Standard query response 0x7c00 A live03-win-12.ams.albiononline.com A 193.169.238.103",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "193.169.238.110/32": [
+      {
+        "file": "222.csv",
+        "hostname": "live03-win-11.ams.albiononline.com",
+        "packet_number": 7994,
+        "time_seconds": 66.1601305,
+        "dns_summary": "Standard query response 0xae55 A live03-win-11.ams.albiononline.com A 193.169.238.110",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "live03-win-11.ams.albiononline.com",
+        "packet_number": 4834,
+        "time_seconds": 46.9282273,
+        "dns_summary": "Standard query response 0x0b55 A live03-win-11.ams.albiononline.com A 193.169.238.110",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "193.169.238.210/32": [
+      {
+        "file": "111.csv",
+        "hostname": "live03-loginserver.ams.albion.zone",
+        "packet_number": 2102,
+        "time_seconds": 27.5615995,
+        "dns_summary": "Standard query response 0xbe2a A live03-loginserver.ams.albion.zone CNAME live03-win-01.ams.albion.zone A 193.169.238.210",
+        "packets_to": 17,
+        "packets_from": 0
+      },
+      {
+        "file": "222.csv",
+        "hostname": "live03-loginserver.ams.albion.zone",
+        "packet_number": 4462,
+        "time_seconds": 36.3120104,
+        "dns_summary": "Standard query response 0x3b38 A live03-loginserver.ams.albion.zone CNAME live03-win-01.ams.albion.zone A 193.169.238.210",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "live03-loginserver.ams.albion.zone",
+        "packet_number": 3526,
+        "time_seconds": 32.7094369,
+        "dns_summary": "Standard query response 0x0048 A live03-loginserver.ams.albion.zone CNAME live03-win-01.ams.albion.zone A 193.169.238.210",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "193.169.238.248/32": [
+      {
+        "file": "222.csv",
+        "hostname": "live03-win-46.ams.albiononline.com",
+        "packet_number": 4753,
+        "time_seconds": 40.5554782,
+        "dns_summary": "Standard query response 0xe949 A live03-win-46.ams.albiononline.com A 193.169.238.248",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "live03-win-46.ams.albiononline.com",
+        "packet_number": 3742,
+        "time_seconds": 36.6347234,
+        "dns_summary": "Standard query response 0xd3c5 A live03-win-46.ams.albiononline.com A 193.169.238.248",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "193.169.238.96/32": [
+      {
+        "file": "111.csv",
+        "hostname": "live03-win-status.ams.albion.zone",
+        "packet_number": 1828,
+        "time_seconds": 22.7658508,
+        "dns_summary": "Standard query response 0x9ddb A live03-win-status.ams.albion.zone A 193.169.238.96",
+        "packets_to": 37,
+        "packets_from": 0
+      },
+      {
+        "file": "222.csv",
+        "hostname": "live03-win-status.ams.albion.zone",
+        "packet_number": 4034,
+        "time_seconds": 31.0514285,
+        "dns_summary": "Standard query response 0xc094 A live03-win-status.ams.albion.zone A 193.169.238.96",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "live03-win-status.ams.albion.zone",
+        "packet_number": 3113,
+        "time_seconds": 27.3547293,
+        "dns_summary": "Standard query response 0xeda3 A live03-win-status.ams.albion.zone A 193.169.238.96",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "3.164.68.124/32": [
+      {
+        "file": "111.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 1752,
+        "time_seconds": 20.7395442,
+        "dns_summary": "Standard query response 0x7185 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.8 A 3.164.68.54 A 3.164.68.73 A 3.164.68.124",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "222.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 3788,
+        "time_seconds": 29.0651375,
+        "dns_summary": "Standard query response 0xe3f0 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.73 A 3.164.68.54 A 3.164.68.124 A 3.164.68.8",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 2883,
+        "time_seconds": 25.2391138,
+        "dns_summary": "Standard query response 0x8651 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.54 A 3.164.68.124 A 3.164.68.73 A 3.164.68.8",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "3.164.68.54/32": [
+      {
+        "file": "111.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 1752,
+        "time_seconds": 20.7395442,
+        "dns_summary": "Standard query response 0x7185 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.8 A 3.164.68.54 A 3.164.68.73 A 3.164.68.124",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "222.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 3788,
+        "time_seconds": 29.0651375,
+        "dns_summary": "Standard query response 0xe3f0 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.73 A 3.164.68.54 A 3.164.68.124 A 3.164.68.8",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 2883,
+        "time_seconds": 25.2391138,
+        "dns_summary": "Standard query response 0x8651 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.54 A 3.164.68.124 A 3.164.68.73 A 3.164.68.8",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "3.164.68.73/32": [
+      {
+        "file": "111.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 1752,
+        "time_seconds": 20.7395442,
+        "dns_summary": "Standard query response 0x7185 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.8 A 3.164.68.54 A 3.164.68.73 A 3.164.68.124",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "222.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 3788,
+        "time_seconds": 29.0651375,
+        "dns_summary": "Standard query response 0xe3f0 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.73 A 3.164.68.54 A 3.164.68.124 A 3.164.68.8",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 2883,
+        "time_seconds": 25.2391138,
+        "dns_summary": "Standard query response 0x8651 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.54 A 3.164.68.124 A 3.164.68.73 A 3.164.68.8",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "3.164.68.8/32": [
+      {
+        "file": "111.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 1752,
+        "time_seconds": 20.7395442,
+        "dns_summary": "Standard query response 0x7185 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.8 A 3.164.68.54 A 3.164.68.73 A 3.164.68.124",
+        "packets_to": 8,
+        "packets_from": 10
+      },
+      {
+        "file": "222.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 3788,
+        "time_seconds": 29.0651375,
+        "dns_summary": "Standard query response 0xe3f0 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.73 A 3.164.68.54 A 3.164.68.124 A 3.164.68.8",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "status.albiononline.com",
+        "packet_number": 2883,
+        "time_seconds": 25.2391138,
+        "dns_summary": "Standard query response 0x8651 A status.albiononline.com CNAME d1lv137cgj0w57.cloudfront.net A 3.164.68.54 A 3.164.68.124 A 3.164.68.73 A 3.164.68.8",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "5.188.125.60/32": [
+      {
+        "file": "111.csv",
+        "hostname": "live01-win-status.dc02.albion.zone",
+        "packet_number": 1835,
+        "time_seconds": 22.7868223,
+        "dns_summary": "Standard query response 0xd02b A live01-win-status.dc02.albion.zone A 5.188.125.60",
+        "packets_to": 34,
+        "packets_from": 37
+      },
+      {
+        "file": "222.csv",
+        "hostname": "live01-win-status.dc02.albion.zone",
+        "packet_number": 4033,
+        "time_seconds": 31.0514279,
+        "dns_summary": "Standard query response 0xbb04 A live01-win-status.dc02.albion.zone A 5.188.125.60",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "live01-win-status.dc02.albion.zone",
+        "packet_number": 3114,
+        "time_seconds": 27.3557698,
+        "dns_summary": "Standard query response 0x5896 A live01-win-status.dc02.albion.zone A 5.188.125.60",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "5.45.187.118/32": [
+      {
+        "file": "111.csv",
+        "hostname": "live02-win-status.sg.albion.zone",
+        "packet_number": 1830,
+        "time_seconds": 22.7831965,
+        "dns_summary": "Standard query response 0x43f1 A live02-win-status.sg.albion.zone A 5.45.187.118",
+        "packets_to": 37,
+        "packets_from": 0
+      },
+      {
+        "file": "222.csv",
+        "hostname": "live02-win-status.sg.albion.zone",
+        "packet_number": 4030,
+        "time_seconds": 31.0453048,
+        "dns_summary": "Standard query response 0xdcb2 A live02-win-status.sg.albion.zone A 5.45.187.118",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "live02-win-status.sg.albion.zone",
+        "packet_number": 3144,
+        "time_seconds": 27.4311492,
+        "dns_summary": "Standard query response 0xce70 A live02-win-status.sg.albion.zone A 5.45.187.118",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "57.129.90.115/32": [
+      {
+        "file": "111.csv",
+        "hostname": "albion1.battleye.com",
+        "packet_number": 1122,
+        "time_seconds": 8.5650467,
+        "dns_summary": "Standard query response 0x7f80 A albion1.battleye.com CNAME master1.battleye.com A 57.129.90.115",
+        "packets_to": 346,
+        "packets_from": 0
+      },
+      {
+        "file": "222.csv",
+        "hostname": "albion1.battleye.com",
+        "packet_number": 3030,
+        "time_seconds": 15.7351732,
+        "dns_summary": "Standard query response 0x1d41 A albion1.battleye.com CNAME master1.battleye.com A 57.129.90.115",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "albion1.battleye.com",
+        "packet_number": 2059,
+        "time_seconds": 12.1752741,
+        "dns_summary": "Standard query response 0x1679 A albion1.battleye.com CNAME master1.battleye.com A 57.129.90.115",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "8.47.69.1/32": [
+      {
+        "file": "111.csv",
+        "hostname": "serverstatus.albiononline.com",
+        "packet_number": 84,
+        "time_seconds": 3.4145178,
+        "dns_summary": "Standard query response 0xc7c4 A serverstatus.albiononline.com A 8.6.112.1 A 8.47.69.1",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "111.csv",
+        "hostname": "serverstatus-ams.albiononline.com",
+        "packet_number": 89,
+        "time_seconds": 3.421968,
+        "dns_summary": "Standard query response 0xa35c A serverstatus-ams.albiononline.com A 8.6.112.1 A 8.47.69.1",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "111.csv",
+        "hostname": "albiononline.com",
+        "packet_number": 93,
+        "time_seconds": 3.4322572,
+        "dns_summary": "Standard query response 0x3b93 A albiononline.com A 8.6.112.1 A 8.47.69.1",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "111.csv",
+        "hostname": "serverstatus-sgp.albiononline.com",
+        "packet_number": 98,
+        "time_seconds": 3.4405599,
+        "dns_summary": "Standard query response 0xd900 A serverstatus-sgp.albiononline.com A 8.6.112.1 A 8.47.69.1",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ],
+    "8.6.112.1/32": [
+      {
+        "file": "111.csv",
+        "hostname": "serverstatus.albiononline.com",
+        "packet_number": 84,
+        "time_seconds": 3.4145178,
+        "dns_summary": "Standard query response 0xc7c4 A serverstatus.albiononline.com A 8.6.112.1 A 8.47.69.1",
+        "packets_to": 51,
+        "packets_from": 56
+      },
+      {
+        "file": "111.csv",
+        "hostname": "serverstatus-ams.albiononline.com",
+        "packet_number": 89,
+        "time_seconds": 3.421968,
+        "dns_summary": "Standard query response 0xa35c A serverstatus-ams.albiononline.com A 8.6.112.1 A 8.47.69.1",
+        "packets_to": 51,
+        "packets_from": 56
+      },
+      {
+        "file": "111.csv",
+        "hostname": "albiononline.com",
+        "packet_number": 93,
+        "time_seconds": 3.4322572,
+        "dns_summary": "Standard query response 0x3b93 A albiononline.com A 8.6.112.1 A 8.47.69.1",
+        "packets_to": 51,
+        "packets_from": 56
+      },
+      {
+        "file": "111.csv",
+        "hostname": "serverstatus-sgp.albiononline.com",
+        "packet_number": 98,
+        "time_seconds": 3.4405599,
+        "dns_summary": "Standard query response 0xd900 A serverstatus-sgp.albiononline.com A 8.6.112.1 A 8.47.69.1",
+        "packets_to": 51,
+        "packets_from": 56
+      }
+    ],
+    "92.223.84.84/32": [
+      {
+        "file": "111.csv",
+        "hostname": "live.albiononline.com",
+        "packet_number": 54,
+        "time_seconds": 3.238899,
+        "dns_summary": "Standard query response 0xd804 A live.albiononline.com CNAME cl-4e67da65.gcdn.co A 92.223.84.84",
+        "packets_to": 284,
+        "packets_from": 558
+      },
+      {
+        "file": "222.csv",
+        "hostname": "live.albiononline.com",
+        "packet_number": 1531,
+        "time_seconds": 3.7634389,
+        "dns_summary": "Standard query response 0x39ed A live.albiononline.com CNAME cl-4e67da65.gcdn.co A 92.223.84.84",
+        "packets_to": 0,
+        "packets_from": 0
+      },
+      {
+        "file": "333.csv",
+        "hostname": "live.albiononline.com",
+        "packet_number": 480,
+        "time_seconds": 3.7622274,
+        "dns_summary": "Standard query response 0x7ba9 A live.albiononline.com CNAME cl-4e67da65.gcdn.co A 92.223.84.84",
+        "packets_to": 0,
+        "packets_from": 0
+      }
+    ]
+  },
+  "ip_limitations": "Exact IPv4 /32 entries explicitly requested by the user. Includes DNS observations of regional status/login, Europe gameplay, launcher/website/CDN and BattlEye endpoints. DNS-only entries are candidates observed during successful sessions, not verified exclusive game servers. No provider prefixes, FakeIP, IPv6, DNS resolvers or VPN endpoints are included."
+}

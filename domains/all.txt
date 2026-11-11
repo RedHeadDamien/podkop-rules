@@ -1,8 +1,11 @@
 ahc.ovh
 alador.space
+albion1.battleye.com
 albiononline.com
+battleye.becdn.net
 cdn-service.space
 cdn-telegram.org
+cdn.battleye.com
 cdn2cdn.com
 cdn2site.com
 cdn32.lol
@@ -20,9 +23,14 @@ kino.pub
 kino.watch
 kinopub.online
 kpdl.link
+live01-win-status.dc02.albion.zone
 live02-loginserver.sg.albion.zone
+live02-win-status.sg.albion.zone
 live03-loginserver.ams.albion.zone
+live03-win-01.ams.albion.zone
+live03-win-status.ams.albion.zone
 loginserver.live.albion.zone
+master1.battleye.com
 mos-gorsud.co
 mycdn.video
 proxykp.xyz
