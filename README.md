@@ -8,25 +8,27 @@
 
 | Сервис | Домены | IPv4-подсети | Автообновление |
 |---|---:|---:|---|
-| Telegram | 4 | 9 | Только подсети, официальный CIDR-feed |
-| Twitch | 4 | 0 | Нет, ручная проверка источников |
+| Telegram | 9 | 9 | Только подсети, официальный CIDR-feed |
+| Twitch | 6 | 0 | Нет, ручная проверка источников |
 | Albion Online | 4 | 0 | Нет, ручная проверка источников |
-| Общие списки | 12 | 9 | Генерация из включённых сервисов |
+| Общие списки | 19 | 9 | Генерация из включённых сервисов |
 
 Последнее исследование: 11 ноября 2026 года. Это проверка источников, не гарантия полноты покрытия всех приложений.
+
+В коммите `fdc5290` (`edit domains`) расширены доменные списки Telegram и Twitch, а также `domains/all.txt`. В Telegram добавлены `telegra.ph`, `graph.org`, `telesco.pe`, `telegram-cdn.org`, `cdn-telegram.org`; в Twitch — `ext-twitch.tv` и `twitchsvc.net`. Списки Albion Online и IPv4-подсетей не менялись. Для новых доменов ещё не добавлены подтверждающие записи в `sources/sources.json`; их наличие в списке не означает завершённую проверку происхождения.
 
 ## Подключение
 
 В существующей секции VPN укажите доменный Raw URL в поле **«Внешние списки доменов»**, а IPv4 URL — в **«Внешние списки подсетей»**. Можно использовать пару `all.txt` либо файлы отдельных сервисов. Пустые файлы подсетей Twitch/Albion подключать не нужно: Podkop считает пустую загрузку ошибкой. [Пошаговая инструкция](docs/podkop-setup.md).
 
-Владелец GitHub пока не определён: GitHub CLI отсутствует, публикация не выполнена. Следующие URL — **шаблоны**, замените `OWNER` своим логином после публикации в ветку `main`:
+Адрес репозитория из Git remote `origin`: [RedHeadDamien/podkop-rules](https://github.com/RedHeadDamien/podkop-rules). Raw URL ниже соответствуют этому адресу и ветке `main`; доступность опубликованных файлов при обновлении README не проверялась.
 
 | Сервис | Домены | Подсети |
 |---|---|---|
-| Все | `https://raw.githubusercontent.com/OWNER/podkop-rules/main/domains/all.txt` | `https://raw.githubusercontent.com/OWNER/podkop-rules/main/subnets/all.txt` |
-| Telegram | `https://raw.githubusercontent.com/OWNER/podkop-rules/main/domains/telegram.txt` | `https://raw.githubusercontent.com/OWNER/podkop-rules/main/subnets/telegram.txt` |
-| Twitch | `https://raw.githubusercontent.com/OWNER/podkop-rules/main/domains/twitch.txt` | `https://raw.githubusercontent.com/OWNER/podkop-rules/main/subnets/twitch.txt` (пустой) |
-| Albion Online | `https://raw.githubusercontent.com/OWNER/podkop-rules/main/domains/albion.txt` | `https://raw.githubusercontent.com/OWNER/podkop-rules/main/subnets/albion.txt` (пустой) |
+| Все | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/domains/all.txt` | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/subnets/all.txt` |
+| Telegram | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/domains/telegram.txt` | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/subnets/telegram.txt` |
+| Twitch | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/domains/twitch.txt` | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/subnets/twitch.txt` (пустой) |
+| Albion Online | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/domains/albion.txt` | `https://raw.githubusercontent.com/RedHeadDamien/podkop-rules/main/subnets/albion.txt` (пустой) |
 
 ## Формат и устройство проекта
 
@@ -91,9 +93,9 @@ Push через `GITHUB_TOKEN` не запускает обычный push-workf
 
 ## Ограничения
 
-**Telegram:** основной/API/web-трафик покрывается доменами, прямые MTProto-соединения — официальными CIDR. Это относится к Desktop, Android, iOS и web при прохождении через роутер, но проверка клиентов не выполнялась. Медиа и файлы используют инфраструктуру Telegram; новые внешние зависимости требуют исследования. UDP, P2P-адреса собеседников и сторонние STUN/TURN не гарантируются списками. Нужна проверка поддержки UDP действующим VPN; конфигурацию проект не меняет.
+**Telegram:** основной/API/web-трафик покрывается доменами, прямые MTProto-соединения — официальными CIDR. В текущем списке также присутствуют дополнительные домены публикаций и медиа, добавленные в `fdc5290`; их назначение и происхождение требуют фиксации в источниках. Это относится к Desktop, Android, iOS и web при прохождении через роутер, но проверка клиентов не выполнялась. Медиа и файлы используют инфраструктуру Telegram; новые внешние зависимости требуют исследования. UDP, P2P-адреса собеседников и сторонние STUN/TURN не гарантируются списками. Нужна проверка поддержки UDP действующим VPN; конфигурацию проект не меняет.
 
-**Twitch:** `twitch.tv` покрывает сайт, API, авторизацию, чат и часть VOD; `ttvnw.net` — доставку видео, `jtvnw.net` и `twitchcdn.net` — ресурсы/CDN. При смене CDN возможны дополнительные конкретные домены CloudFront: добавляйте только после проверки HAR. Целые сети AWS/Fastly и корень `cloudfront.net` не включены. Нет заявления о полном покрытии всех VOD/расширений.
+**Twitch:** `twitch.tv` покрывает сайт, API, авторизацию, чат и часть VOD; `ttvnw.net` — доставку видео, `jtvnw.net` и `twitchcdn.net` — ресурсы/CDN. В `fdc5290` добавлены `ext-twitch.tv` и `twitchsvc.net`; подтверждающие источники для этих записей ещё не оформлены. При смене CDN возможны дополнительные конкретные домены CloudFront: добавляйте только после проверки HAR. Целые сети AWS/Fastly и корень `cloudfront.net` не включены. Нет заявления о полном покрытии всех VOD/расширений.
 
 **Albion Online:** включены сайт и подтверждённые DNS-имена входа Americas/Asia/Europe. Полного списка игровых серверов, IP, CDN и портов в проверенных официальных материалах нет. Подсети пусты намеренно. Вход в игру не доказывает маршрутизацию игровых UDP-сессий; региональные адреса за DDoS-защитой могут меняться. [Анализ соединений Windows 11/OpenWrt](docs/albion-network-analysis.md) необходим для дополнения игрового покрытия.
 
@@ -101,6 +103,10 @@ Push через `GITHUB_TOKEN` не запускает обычный push-workf
 
 ## Публикация и проверки
 
-Локальный проект подготовлен. GitHub CLI в окружении не обнаружен; GitHub Actions и проектные Raw URL ещё не проверены на сервере. Команды создания публичного репозитория и проверки всех ссылок приведены в [docs/publishing.md](docs/publishing.md). Фактически выполненные проверки: [docs/verification.md](docs/verification.md).
+В Git настроен `origin` на `https://github.com/RedHeadDamien/podkop-rules.git`. Статус серверных GitHub Actions и доступность Raw URL при этом обновлении README не проверялись. Инструкции публикации и проверки ссылок приведены в [docs/publishing.md](docs/publishing.md); при уже настроенном `origin` используйте существующий репозиторий, а не команду его повторного создания.
+
+После `fdc5290` доменные файлы Telegram/Twitch и общий доменный файл не соответствуют требуемой сортировке, а сервисные файлы Telegram/Twitch не имеют завершающего перевода строки. Новые домены также отсутствуют в `records` источников. До исправления этих несоответствий валидация и проверка актуальности сборки не проходят; автообновление тоже начинает работу с валидации и остановится на этих ошибках. Сначала приведите сервисные файлы к формату и подтвердите источники, затем выполните сборку и проверки.
+
+Исторические результаты первоначальной версии находятся в [docs/verification.md](docs/verification.md); они не подтверждают успешную проверку изменений `fdc5290`.
 
 Лицензия MIT относится к коду и документации проекта; первичные источники сохраняют свои права. Это независимый проект, не официальный продукт Podkop, Telegram, Twitch или Sandbox Interactive.
