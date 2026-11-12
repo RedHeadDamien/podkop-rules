@@ -63,6 +63,31 @@
         "57.0.0.0/8",
         "8.32.0.0/11"
       ]
+    },
+    "spotify": {
+      "name": "Spotify",
+      "enabled": true,
+      "domains": "domains/spotify.txt",
+      "subnets": "subnets/spotify.txt",
+      "auto_update": false,
+      "sources": [
+        "spotify-api",
+        "spotify-resolver",
+        "spotify-dns-ap-gae2",
+        "spotify-dns-ap-gew1",
+        "spotify-dns-ap-guc3",
+        "spotify-dns-ap-gue1",
+        "spotify-dns-gae2-dealer",
+        "spotify-dns-gae2-spclient",
+        "spotify-dns-gew1-dealer",
+        "spotify-dns-gew1-spclient",
+        "spotify-dns-guc3-dealer",
+        "spotify-dns-guc3-spclient",
+        "spotify-dns-gue1-dealer",
+        "spotify-dns-gue1-spclient",
+        "spotify-connect",
+        "spotify-sonos-ports"
+      ]
     }
   }
 }

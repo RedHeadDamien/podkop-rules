@@ -1,0 +1,376 @@
+{
+  "checked_on": "2026-11-12",
+  "resolver_url": "https://apresolve.spotify.com/?type=accesspoint&type=dealer&type=spclient",
+  "resolver": {
+    "accesspoint": [
+      "ap-gew1.spotify.com:4070",
+      "ap-gew1.spotify.com:443",
+      "ap-gew1.spotify.com:80",
+      "ap-guc3.spotify.com:4070",
+      "ap-gue1.spotify.com:443",
+      "ap-gae2.spotify.com:80"
+    ],
+    "dealer": [
+      "gew1-dealer.spotify.com:443",
+      "guc3-dealer.spotify.com:443",
+      "gue1-dealer.spotify.com:443",
+      "gae2-dealer.spotify.com:443"
+    ],
+    "spclient": [
+      "gew1-spclient.spotify.com:443",
+      "guc3-spclient.spotify.com:443",
+      "gue1-spclient.spotify.com:443",
+      "gae2-spclient.spotify.com:443"
+    ]
+  },
+  "dns": {
+    "ap-gae2.spotify.com": {
+      "url": "https://dns.google/resolve?name=ap-gae2.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "ap-gae2.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "ap-gae2.spotify.com.",
+            "type": 1,
+            "TTL": 59,
+            "data": "104.199.241.202"
+          }
+        ]
+      }
+    },
+    "ap-gew1.spotify.com": {
+      "url": "https://dns.google/resolve?name=ap-gew1.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "ap-gew1.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "ap-gew1.spotify.com.",
+            "type": 1,
+            "TTL": 67,
+            "data": "104.199.65.9"
+          }
+        ]
+      }
+    },
+    "ap-guc3.spotify.com": {
+      "url": "https://dns.google/resolve?name=ap-guc3.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "ap-guc3.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "ap-guc3.spotify.com.",
+            "type": 1,
+            "TTL": 300,
+            "data": "104.154.127.247"
+          }
+        ]
+      }
+    },
+    "ap-gue1.spotify.com": {
+      "url": "https://dns.google/resolve?name=ap-gue1.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "ap-gue1.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "ap-gue1.spotify.com.",
+            "type": 1,
+            "TTL": 250,
+            "data": "34.158.255.62"
+          }
+        ]
+      }
+    },
+    "gae2-dealer.spotify.com": {
+      "url": "https://dns.google/resolve?name=gae2-dealer.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "gae2-dealer.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "gae2-dealer.spotify.com.",
+            "type": 5,
+            "TTL": 50,
+            "data": "gae2-dealer-ssl.spotify.com."
+          },
+          {
+            "name": "gae2-dealer-ssl.spotify.com.",
+            "type": 1,
+            "TTL": 241,
+            "data": "35.186.224.35"
+          }
+        ]
+      }
+    },
+    "gae2-spclient.spotify.com": {
+      "url": "https://dns.google/resolve?name=gae2-spclient.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "gae2-spclient.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "gae2-spclient.spotify.com.",
+            "type": 5,
+            "TTL": 89,
+            "data": "edge-web-gae2.dual-gslb.spotify.com."
+          },
+          {
+            "name": "edge-web-gae2.dual-gslb.spotify.com.",
+            "type": 1,
+            "TTL": 42,
+            "data": "35.186.224.22"
+          }
+        ]
+      }
+    },
+    "gew1-dealer.spotify.com": {
+      "url": "https://dns.google/resolve?name=gew1-dealer.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "gew1-dealer.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "gew1-dealer.spotify.com.",
+            "type": 5,
+            "TTL": 41,
+            "data": "gew1-dealer-ssl.spotify.com."
+          },
+          {
+            "name": "gew1-dealer-ssl.spotify.com.",
+            "type": 1,
+            "TTL": 77,
+            "data": "35.186.224.33"
+          }
+        ]
+      }
+    },
+    "gew1-spclient.spotify.com": {
+      "url": "https://dns.google/resolve?name=gew1-spclient.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "gew1-spclient.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "gew1-spclient.spotify.com.",
+            "type": 5,
+            "TTL": 42,
+            "data": "edge-web-gew1.dual-gslb.spotify.com."
+          },
+          {
+            "name": "edge-web-gew1.dual-gslb.spotify.com.",
+            "type": 1,
+            "TTL": 2,
+            "data": "35.186.224.26"
+          }
+        ]
+      }
+    },
+    "guc3-dealer.spotify.com": {
+      "url": "https://dns.google/resolve?name=guc3-dealer.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "guc3-dealer.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "guc3-dealer.spotify.com.",
+            "type": 5,
+            "TTL": 198,
+            "data": "guc3-dealer-ssl.spotify.com."
+          },
+          {
+            "name": "guc3-dealer-ssl.spotify.com.",
+            "type": 1,
+            "TTL": 198,
+            "data": "35.186.224.36"
+          }
+        ]
+      }
+    },
+    "guc3-spclient.spotify.com": {
+      "url": "https://dns.google/resolve?name=guc3-spclient.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "guc3-spclient.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "guc3-spclient.spotify.com.",
+            "type": 5,
+            "TTL": 32,
+            "data": "edge-web-guc3.dual-gslb.spotify.com."
+          },
+          {
+            "name": "edge-web-guc3.dual-gslb.spotify.com.",
+            "type": 1,
+            "TTL": 84,
+            "data": "35.186.224.31"
+          }
+        ]
+      }
+    },
+    "gue1-dealer.spotify.com": {
+      "url": "https://dns.google/resolve?name=gue1-dealer.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "gue1-dealer.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "gue1-dealer.spotify.com.",
+            "type": 5,
+            "TTL": 260,
+            "data": "gue1-dealer-ssl.spotify.com."
+          },
+          {
+            "name": "gue1-dealer-ssl.spotify.com.",
+            "type": 1,
+            "TTL": 260,
+            "data": "35.186.224.38"
+          }
+        ]
+      }
+    },
+    "gue1-spclient.spotify.com": {
+      "url": "https://dns.google/resolve?name=gue1-spclient.spotify.com&type=A",
+      "answer": {
+        "Status": 0,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "gue1-spclient.spotify.com.",
+            "type": 1
+          }
+        ],
+        "Answer": [
+          {
+            "name": "gue1-spclient.spotify.com.",
+            "type": 5,
+            "TTL": 298,
+            "data": "edge-web-gue1.dual-gslb.spotify.com."
+          },
+          {
+            "name": "edge-web-gue1.dual-gslb.spotify.com.",
+            "type": 1,
+            "TTL": 7,
+            "data": "35.186.224.9"
+          }
+        ]
+      }
+    }
+  }
+}
