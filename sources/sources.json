@@ -37,7 +37,7 @@
       "data_type": "subnets",
       "trust": "official",
       "method": "https-cidr",
-      "last_checked": "2026-11-13",
+      "last_checked": "2026-11-14",
       "last_updated": "2026-11-11",
       "auto_update": true,
       "records": [
